@@ -1,0 +1,16 @@
+rules:
+  - id: sol23-02_dbg_source_join
+    patterns:
+      - pattern: |
+          function $FUNC()
+          {
+            ...
+            return <... window.location.search ...>
+            ...
+          }
+      - focus-metavariable:
+          - $FUNC
+    languages:
+      - javascript
+    message: Potentially dangerous input returned by $FUNC
+    severity: ERROR
