@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <div id=fred> Hello world!</div>
+    </body>
+    <script type="text/javascript" src="ex23-03-file.js"></script>
+    <script>
+    
+        function trackSearch() {
+            
+            // The join mode rule should only highlight this result
+            // ruleid: sol23-01_dbg_sink_join
+            var query = GetSomeData1();
+            var doSome = "some other stuff";
+            document.write('<img src="/resources/images/tracker.gif?searchTerms='+query+'">');
+
+
+            // The join mode rule should not highlight this result
+            // ruleid: sol23-01_dbg_sink_join
+            query = GetSomeData2();
+            doSome = "some other stuff";
+            document.write('<img src="/resources/images/tracker.gif?searchTerms='+query+'">');
+        }
+
+        trackSearch()
+    </script>
+</html>
