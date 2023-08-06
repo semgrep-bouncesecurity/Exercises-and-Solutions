@@ -1,0 +1,14 @@
+rules:
+  - id: sol06_dbg_pattern-either
+    patterns:
+      - pattern-either:
+          - pattern: $VAR == ...
+          - pattern: $VAR != ...
+          - patterns:
+              - pattern: $VAR = ...
+              - pattern-inside: if(...)
+    message: Semgrep found a case where a comparison of different types could
+      incorrectly result in True due to type confusion
+    languages:
+      - javascript
+    severity: WARNING
