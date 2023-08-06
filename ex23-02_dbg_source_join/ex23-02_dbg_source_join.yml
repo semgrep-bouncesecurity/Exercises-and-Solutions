@@ -1,0 +1,10 @@
+rules:
+  - id: ex23-02_dbg_source_join
+    patterns:
+      - pattern: $FUNC()
+      - focus-metavariable:
+          - $FUNC
+    languages:
+      - javascript
+    message: Potentially dangerous input returned by $FUNC
+    severity: ERROR
