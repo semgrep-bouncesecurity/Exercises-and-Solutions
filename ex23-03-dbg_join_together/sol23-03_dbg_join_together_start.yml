@@ -1,0 +1,41 @@
+rules:
+- id: sol23-03_dbg_join_together_start
+  languages:
+    - typescript
+    - html
+  mode: join
+  join:
+    rules:
+      - id: sol23-01_dbg_sink_join
+        languages:
+          - html
+        patterns:
+          - pattern: |
+              <script>$...JS</script>
+          - metavariable-pattern:
+              language: javascript
+              metavariable: $...JS
+              patterns:
+                - pattern: |
+                    ... $QUERY = $FUNC()
+                    ...
+                    document.write('...' + $QUERY + '...');
+          - focus-metavariable:
+              - $FUNC
+      - id: sol23-02_dbg_source_join
+        patterns:
+          - pattern: |
+              function $FUNC()
+              {
+                ...
+                return <... window.location.search ...>
+                ...
+              }
+          - focus-metavariable:
+              - $FUNC
+        languages:
+          - javascript
+    on:
+    - 'sol23-01_dbg_sink_join.$FUNC == sol23-02_dbg_source_join.$FUNC'
+  severity: WARNING
+  message: Potential xss was found - dangerous input starts off here
