@@ -1,0 +1,11 @@
+rules:
+  - id: ex06_dbg_pattern-either
+    patterns:
+      - pattern-either:
+          - pattern: $VAR == ...
+          - pattern: $VAR != ...
+    message: Semgrep found a case where a comparison of different types could
+      incorrectly result in True due to type confusion
+    languages:
+      - javascript
+    severity: WARNING
