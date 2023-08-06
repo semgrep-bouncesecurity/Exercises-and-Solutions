@@ -1,0 +1,16 @@
+rules:
+  - id: ex23-01_dbg_sink_join
+    languages:
+      - html
+    patterns:
+      - pattern: |
+          <script>$...JS</script>
+      - metavariable-pattern:
+          language: javascript
+          metavariable: $...JS
+          patterns:
+            - pattern: $FUNC
+      - focus-metavariable:
+          - $FUNC
+    message: Potential dangerous variable included in dangerous sink
+    severity: ERROR
