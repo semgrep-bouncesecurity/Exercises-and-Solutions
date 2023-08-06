@@ -1,0 +1,12 @@
+rules:
+  - id: ex07_dbg_patterns
+    message: User controlled data in dangerous methods within the `UnsafeFunctions`
+      class could lead to XSS vulnerabilities
+    languages:
+      - javascript
+    severity: ERROR
+    patterns:
+      - pattern: |
+          $EL.innerHTML = $HTML;
+      - pattern-not: |
+          $EL.innerHTML = "...";
