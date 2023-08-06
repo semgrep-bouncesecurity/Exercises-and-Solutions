@@ -1,0 +1,6 @@
+rules:
+- id: ex23-03_dbg_join_together_start
+ 
+
+  severity: WARNING
+  message: Potential xss was found
