@@ -1,0 +1,22 @@
+rules:
+  - id: sol21_dbg_decorator
+    patterns:
+      - pattern: |
+          def $FUNC(...):
+            ...
+      - pattern-not-inside: |
+          @PD.$DCORTR
+          def $FUNC(...):
+            ... 
+      - pattern-inside: |
+          class $CLASS:
+            ...
+      - metavariable-regex:
+          metavariable: $CLASS
+          regex: (SensitiveFunctions|MoreSensitiveFunctions)\b
+      - focus-metavariable:
+          - $FUNC
+    message: Function is missing an authorization decorator
+    languages:
+      - python
+    severity: ERROR
