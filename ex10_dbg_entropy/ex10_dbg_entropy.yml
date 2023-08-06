@@ -1,0 +1,12 @@
+rules:
+  - id: ex10_dbg_entropy
+    patterns:
+      - pattern: |
+          {..., $A: "$B", ...}
+      - metavariable-analysis:
+          analyzer: entropy
+          metavariable: $B
+    message: hardcoded secret assigned to $A
+    languages:
+      - javascript
+    severity: WARNING
