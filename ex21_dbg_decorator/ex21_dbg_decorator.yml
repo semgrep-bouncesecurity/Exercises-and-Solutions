@@ -1,0 +1,13 @@
+rules:
+  - id: ex21_dbg_decorator
+    patterns:
+      - pattern: |
+          @PD.require_update
+          def $FUNC(...):
+            ...
+      - focus-metavariable:
+          - $FUNC
+    message: Function is missing an authorization decorator
+    languages:
+      - python
+    severity: ERROR
