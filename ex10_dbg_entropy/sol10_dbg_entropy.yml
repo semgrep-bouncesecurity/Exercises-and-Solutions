@@ -1,0 +1,15 @@
+rules:
+  - id: sol10_dbg_entropy
+    patterns:
+      - pattern-either:
+          - pattern: |
+              var $A = "$B"
+          - pattern: |
+              {..., $A: "$B", ...}
+      - metavariable-analysis:
+          analyzer: entropy
+          metavariable: $B
+    message: hardcoded secret assigned to $A
+    languages:
+      - javascript
+    severity: WARNING
