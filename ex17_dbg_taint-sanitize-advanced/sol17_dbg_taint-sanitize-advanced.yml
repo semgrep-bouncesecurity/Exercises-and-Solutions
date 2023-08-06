@@ -1,0 +1,21 @@
+rules:
+  - id: sol17_dbg_taint-sanitize-advanced
+    languages:
+      - javascript
+    mode: taint
+    pattern-sources:
+      - pattern: $QUERY = <... window.location.href ...>
+      - pattern: $QUERY = <... window.location.search ...>
+      - patterns:
+          - pattern: $QUERY = potentiallyDangerous.$PROP
+          - pattern-not-inside: |
+              potentiallyDangerous.selfClean();
+              ...
+    pattern-sanitizers:
+      - pattern: $VAR.sanitizeToString(...)
+      - pattern: CustomSanitize(...)
+    pattern-sinks:
+      - pattern: document.write('...' + $QUERY + '...');
+    message: Semgrep found reflected xss, an untrusted input is stored in $QUERY and
+      then written to the page
+    severity: WARNING
